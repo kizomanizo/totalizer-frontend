@@ -1,24 +1,9 @@
-# totalizer
+# Totalizer Project
 
-## Project setup
-```
-npm install
-```
+This project runs totals for numbers that are sent from APIs. I have used mock APIs that may be deleted after a shortwhile, take note in the URLs for those APIs.
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
+## License
+MIT
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

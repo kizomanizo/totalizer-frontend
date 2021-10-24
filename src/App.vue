@@ -1,28 +1,30 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+        <div id="app">
+            <Navigation />
+            <b-container v-if="payload.heading">
+                <h3>{{ payload.heading }}</h3>
+                <p>{{ payload.message }}</p>
+            </b-container>
+
+            <b-container v-else>
+                <router-view />
+            </b-container>
+        </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+    import Navigation from '@/components/Navigation'
+    import { mapGetters } from 'vuex'
+    export default {
+        components: {
+            Navigation,
+        },
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+        computed: {
+            ...mapGetters({
+                alert: 'reports/alert',
+                payload: 'reports/payload'
+            })
+        },
+    }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
