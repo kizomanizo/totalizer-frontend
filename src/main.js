@@ -16,9 +16,9 @@ axios.defaults.baseURL = process.env.VUE_APP_BASEURL || 'http://myjson.dit.upm.e
 Vue.config.productionTip = false
 
 store.dispatch('reports/getHello', localStorage.getItem('payload')).then(() => {
-    new Vue({
-        router,
-        store,
-        render: h => h(App)
-    }).$mount('#app')
+  new Vue({
+    router,
+    store,
+    render: h => h(App)
+  }).$mount('#app')
 })
