@@ -1,73 +1,62 @@
 <template>
-  <div>
-    <b-navbar type="dark" variant="dark">
-      <b-container>
-        <b-navbar-nav>
-          <b-navbar-brand>Monthly Totals</b-navbar-brand>
-          <b-nav-item href="#" v-if="$route.name!='total'" @click.prevent="getTotal">Total</b-nav-item>
-          <b-nav-item href="#" v-if="$route.name!='other'" @click.prevent="getOther">Other</b-nav-item>
-        </b-navbar-nav>
-        <b-navbar-nav ml="auto">
-          <b-nav-text><strong>User</strong></b-nav-text>
-          <b-nav-item href="#" v-if="$route.name!='hello'" @click.prevent="getHello">Hello</b-nav-item>
-        </b-navbar-nav>
-      </b-container>
-    </b-navbar>
-
-    <b-alert v-if="alert==true" variant="info" show>{{ message }}</b-alert>
-  </div>
+    <div>
+        <b-navbar type="dark" variant="dark">
+            <b-container>
+                <b-navbar-nav>
+                    <b-navbar-brand>Totalizer App</b-navbar-brand>
+                    <b-nav-item href="#" v-if="$route.name!='home'" @click.prevent="getHome">Home</b-nav-item>
+                    <b-nav-item href="#" v-if="$route.name!='data'" @click.prevent="getData">Data</b-nav-item>
+                </b-navbar-nav>
+                <b-navbar-nav ml="auto">
+                    <b-nav-text><strong>></strong></b-nav-text>
+                    <b-nav-item href="#" v-if="$route.name!='login'" @click.prevent="signOut">Logout</b-nav-item>
+                </b-navbar-nav>
+            </b-container>
+        </b-navbar>
+    </div>
 </template>
 
 <script>
-import { mapGetters, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 export default {
-  name: 'Navigation',
-  computed: {
-    ...mapGetters ({
-      alert: 'reports/alert',
-      message: 'reports/message',
-    }),
-  },
-  methods: {
-    ...mapActions ({
-      getHelloAction: 'reports/getHello',
-      getTotalAction: 'reports/getTotal',
-      getOtherAction: 'reports/getOther',
-      getErrorAction: 'reports/getError',
-    }),
-
-    getHello () {
-      this.getHelloAction().then(() => {
-        this.$router.replace({
-          name: 'hello'
-        })
-      })
-    },
-
-    getTotal () {
-      this.getTotalAction().then(() => {
-        this.$router.replace({
-          name: 'total'
-        })
-      })
-    },
-
-    getOther () {
-      this.getOtherAction().then(() => {
-        this.$router.replace({
-          name: 'other'
-        })
-      })
-    },
-
-    getError () {
-      this.getErrorAction().then(() => {
-        this.$router.replace({
-          name: 'error'
-        })
-      })
-    },
-
-  }
+    name: 'Navigation',
+    computed: {},
+    methods: {
+        ...mapActions ({
+            // signOutAction: 'auth/signOut',
+            // homeAction: 'content/getHome',
+            // dataAction: 'content/getData'
+        }),
+        signOut() {
+            this.$store.dispatch('auth/signOut');
+            this.$router.push('/login');
+        },
+        getHome() {
+            this.$store.dispatch('auth/getHome');
+            this.$router.push('/home');
+        },
+        getData() {
+            this.$store.dispatch('auth/getData');
+            this.$router.push('/data');
+        },
+        // async signOut() {
+        //     await this.signOutAction()
+        //     this.$router.replace({ name: 'login' })
+        // },
+        // getHome() {
+        //     this.homeAction().then(() => {
+        //         this.$router.replace({
+        //             name: 'home'
+        //         })
+        //     })
+        // },
+        // getData() {
+        //     this.dataAction().then(() => {
+        //         this.$router.replace({
+        //             name: 'data'
+        //         })
+        //     })
+        // },
+    }
 }
 </script>

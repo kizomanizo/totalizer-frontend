@@ -1,30 +1,49 @@
 <template>
     <div id="app">
-      <Navigation />
-      <b-container v-if="payload.heading">
-        <h3>{{ payload.heading }}</h3>
-        <p>{{ payload.message }}</p>
-      </b-container>
+        <Navigation />
+        
+        <b-container v-if="!authenticated" id="content-wrap">
+            <router-view name="signin" />
+        </b-container>
 
-      <b-container v-else>
-        <router-view />
-      </b-container>
+        <b-container v-else id="content-wrap">
+            <router-view />
+        </b-container>
+
+        <FooterBar />
     </div>
 </template>
 
 <script>
-  import Navigation from '@/components/Navigation'
-  import { mapGetters } from 'vuex'
-  export default {
-    components: {
-      Navigation,
-    },
+    import Navigation from '@/components/Navigation'
+    import FooterBar from '@/components/FooterBar'
+    // import { mapGetters } from 'vuex'
+    import 'bootstrap/dist/css/bootstrap.css'
+    import 'bootstrap-vue/dist/bootstrap-vue.css'
 
-    computed: {
-      ...mapGetters({
-        alert: 'reports/alert',
-        payload: 'reports/payload'
-      })
-    },
-  }
+    export default {
+        components: {
+            Navigation,
+            FooterBar
+        },
+
+        computed: {
+            // ...mapGetters({
+            //     alert: 'auth/alert',
+            //     user: 'auth/user',
+                // authenticated: 'auth/authenticated'
+            // })
+        },
+    }
 </script>
+
+<style>
+    #app {
+        position: relative;
+        min-height: 100vh;
+    }
+
+    #content-wrap {
+        padding-bottom: 2.5rem;    /* Footer height */
+    }
+</style>

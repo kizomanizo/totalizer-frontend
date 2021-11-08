@@ -2,7 +2,7 @@
 module.exports = {
     // baseUrl: 'http://myjson.dit.upm.es/api/bins',
     devServer: {
-      host: 'localhost',
-      port: 8081
+        host: 'localhost',
+        port: 8081
     }
-  }
+}
